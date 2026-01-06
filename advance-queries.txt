@@ -1,0 +1,122 @@
+-- Q1: Difference between total number of CITY entries and distinct CITY entries in STATION
+SELECT COUNT(*) - COUNT(DISTINCT CITY) AS Difference
+FROM STATION;
+
+-- Q2: Shortest CITY name in STATION
+SELECT CITY, LENGTH(CITY) AS NameLength
+FROM STATION
+ORDER BY LENGTH(CITY) ASC, CITY ASC
+FETCH FIRST 1 ROW ONLY;
+
+-- Q3: Longest CITY name in STATION
+SELECT CITY, LENGTH(CITY) AS NameLength
+FROM STATION
+ORDER BY LENGTH(CITY) DESC, CITY ASC
+FETCH FIRST 1 ROW ONLY;
+
+-- Q4: List of CITY names from STATION starting with vowels (no duplicates)
+SELECT DISTINCT CITY
+FROM STATION
+WHERE CITY LIKE 'A%' 
+   OR CITY LIKE 'E%' 
+   OR CITY LIKE 'I%' 
+   OR CITY LIKE 'O%' 
+   OR CITY LIKE 'U%'
+ORDER BY CITY;
+
+-- Q5: List of CITY names from STATION ending with vowels (no duplicates)
+SELECT DISTINCT CITY
+FROM STATION
+WHERE CITY LIKE '%a'
+   OR CITY LIKE '%e'
+   OR CITY LIKE '%i'
+   OR CITY LIKE '%o'
+   OR CITY LIKE '%u'
+ORDER BY CITY;
+
+-- Q6: List of CITY names from STATION with vowels as first and last characters (no duplicates)
+SELECT DISTINCT CITY
+FROM STATION
+WHERE (UPPER(CITY) LIKE 'A%' 
+       OR UPPER(CITY) LIKE 'E%' 
+       OR UPPER(CITY) LIKE 'I%' 
+       OR UPPER(CITY) LIKE 'O%' 
+       OR UPPER(CITY) LIKE 'U%')
+  AND (UPPER(CITY) LIKE '%A' 
+       OR UPPER(CITY) LIKE '%E' 
+       OR UPPER(CITY) LIKE '%I' 
+       OR UPPER(CITY) LIKE '%O' 
+       OR UPPER(CITY) LIKE '%U')
+ORDER BY CITY;
+
+-- Q7: List of CITY names from STATION that do not start with vowels (no duplicates)
+SELECT DISTINCT CITY
+FROM STATION
+WHERE UPPER(CITY) NOT LIKE 'A%' 
+  AND UPPER(CITY) NOT LIKE 'E%' 
+  AND UPPER(CITY) NOT LIKE 'I%' 
+  AND UPPER(CITY) NOT LIKE 'O%' 
+  AND UPPER(CITY) NOT LIKE 'U%'
+ORDER BY CITY;
+
+-- Q8: List of CITY names from STATION that either do not start or do not end with vowels (no duplicates)
+SELECT DISTINCT CITY
+FROM STATION
+WHERE 
+    (UPPER(CITY) NOT LIKE 'A%' 
+     AND UPPER(CITY) NOT LIKE 'E%' 
+     AND UPPER(CITY) NOT LIKE 'I%' 
+     AND UPPER(CITY) NOT LIKE 'O%' 
+     AND UPPER(CITY) NOT LIKE 'U%')
+ OR 
+    (UPPER(CITY) NOT LIKE '%A'
+     AND UPPER(CITY) NOT LIKE '%E'
+     AND UPPER(CITY) NOT LIKE '%I'
+     AND UPPER(CITY) NOT LIKE '%O'
+     AND UPPER(CITY) NOT LIKE '%U')
+ORDER BY CITY;
+
+-- Q9: List of CITY names from STATION that do not start and do not end with vowels (no duplicates)
+SELECT DISTINCT CITY
+FROM STATION
+WHERE UPPER(CITY) NOT LIKE 'A%' 
+  AND UPPER(CITY) NOT LIKE 'E%' 
+  AND UPPER(CITY) NOT LIKE 'I%' 
+  AND UPPER(CITY) NOT LIKE 'O%' 
+  AND UPPER(CITY) NOT LIKE 'U%'
+  AND UPPER(CITY) NOT LIKE '%A'
+  AND UPPER(CITY) NOT LIKE '%E'
+  AND UPPER(CITY) NOT LIKE '%I'
+  AND UPPER(CITY) NOT LIKE '%O'
+  AND UPPER(CITY) NOT LIKE '%U'
+ORDER BY CITY;
+
+-- Q10: Greatest LAT_N less than 137.2345, truncated to 4 decimal places
+SELECT DECIMAL(MAX(LAT_N), 10, 4) AS MaxLat
+FROM STATION
+WHERE LAT_N < 137.2345;
+
+-- Q11: Classify triangles based on side lengths
+SELECT 
+    CASE 
+        WHEN A + B <= C OR A + C <= B OR B + C <= A THEN 'Not A Triangle'
+        WHEN A = B AND B = C THEN 'Equilateral'
+        WHEN A = B OR B = C OR A = C THEN 'Isosceles'
+        ELSE 'Scalene'
+    END AS TriangleType
+FROM TRIANGLES;
+
+-- Q12: List of names with first letter of occupation in parentheses
+SELECT name || '(' || SUBSTR(occupation,1,1) || ')' AS NameWithInitial
+FROM OCCUPATIONS
+ORDER BY name;
+
+-- Q13: Count of occurrences of each occupation
+SELECT 'There are a total of ' || COUNT(*) || ' ' || LOWER(occupation) || 's.' AS OccupationCount
+FROM OCCUPATIONS
+GROUP BY occupation
+ORDER BY COUNT(*) ASC, occupation ASC;
+
+-- Q14: Difference between the maximum and minimum populations in CITY
+SELECT MAX(Population) - MIN(Population) PopulationDifference
+FROM CITY;
