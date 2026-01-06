@@ -1,0 +1,14 @@
+RDBMS → MySQL, PostgreSQL, Oracle, SQL Server
+[Expertise : SQL queries, joins, indexing, normalization, transactions, performance tuning]
+
+Learning Steps:
+1. SQL Basics – SELECT, INSERT, UPDATE, DELETE, WHERE, ORDER BY, LIMIT
+2. Joins – INNER, LEFT, RIGHT, FULL OUTER, CROSS
+3. Aggregations & Grouping – COUNT, SUM, AVG, GROUP BY, HAVING
+4. Indexes & Keys – Primary key, Foreign key, Unique, Composite, Index optimization
+5. Normalization & Denormalization – 1NF → 5NF, design best practices
+6. Transactions – COMMIT, ROLLBACK, ACID properties
+7. Stored Procedures & Functions – MySQL/SQL Server/Oracle
+8. Views & Triggers – Automated operations, abstraction
+9. Performance Tuning – Query optimization, EXPLAIN plans, partitioning
+10. Backup & Restore – mysqldump, pg_dump, RMAN
